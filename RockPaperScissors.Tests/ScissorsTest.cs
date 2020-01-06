@@ -1,6 +1,5 @@
-using Xunit;
-
 using RockPaperScissors.Util;
+using Xunit;
 
 namespace RockPaperScissors.Moves
 {

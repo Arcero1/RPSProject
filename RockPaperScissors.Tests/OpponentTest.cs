@@ -1,28 +1,27 @@
-using Xunit;
-
 using RockPaperScissors.Util;
+using Xunit;
 
 namespace RockPaperScissors.AI
 {
     public class OpponentTest
     {
-        Opponent opponent;
+        ComputerPlayer opponent;
 
         [Fact]
         public void ClassicOpponentChosesRockPaperOrScissors()
         {
-            opponent = new Opponent();
+            opponent = new ComputerPlayer();
 
-            MoveType move = opponent.Play();
+            MoveType move = opponent.GenerateNextMove();
             Assert.True(move == MoveType.ROCK || move == MoveType.PAPER || move == MoveType.SCISSORS);
         }
 
         [Fact]
         public void ExtendedOpponentChoosesAnyOfFiveMoves()
         {
-            opponent = new Opponent(GameMode.EXTENDED);
+            opponent = new ComputerPlayer(GameMode.EXTENDED);
 
-            MoveType move = opponent.Play();
+            MoveType move = opponent.GenerateNextMove();
             Assert.True(move == MoveType.ROCK || move == MoveType.PAPER || move == MoveType.SCISSORS || move == MoveType.LIZARD || move == MoveType.SPOCK);
         }
 

@@ -9,7 +9,7 @@ namespace RockPaperScissors
     {
         static void Main(string[] args)
         {
-            Opponent computer = new Opponent();
+            ComputerPlayer computer = new ComputerPlayer();
             Player player = new Player();
 
             UserInterface.DisplayWelcomeScreen();
@@ -19,7 +19,7 @@ namespace RockPaperScissors
                 Move move;
 
                 try
-                { 
+                {
                     move = UserInterface.QueryNextHand();
                 }
                 catch
@@ -27,21 +27,22 @@ namespace RockPaperScissors
                     break;
                 }
 
-                MoveType computerMove = computer.Play();
-                
+                computer.GenerateNextMove();
 
-                UserInterface.DisplayOpponentHand(computerMove);
-                Outcome outcome = player.Play(move, computerMove);
+
+                UserInterface.DisplayOpponentHand(computer.NextMove.GetMoveType());
+                Outcome outcome = player.Compare(computer.NextMove);
+                computer.Compare(player.NextMove); // to 
                 UserInterface.DisplayOutcome(outcome);
-                UserInterface.DisplayScores(player.GetScores());
+                UserInterface.DisplayScores(player.Results);
             } while (true);
 
-            UserInterface.DisplayEndGameScreen(player.GetResult());
-            UserInterface.DisplayScores(player.GetScores());
-            UserInterface.DisplayMoves(player.GetMostUsedMoves(), player.GetMostUsedMoveInstanceNumber());
+            UserInterface.DisplayEndGameScreen(player.OverallResult);
+            UserInterface.DisplayScores(player.Results);
+            UserInterface.DisplayMoves(player.MostUsedMoves, player.MostUsedMovesFrequency);
         }
 
     }
 
-    
+
 }

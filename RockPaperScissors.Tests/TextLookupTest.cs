@@ -1,7 +1,6 @@
+using RockPaperScissors.Util;
 using System;
 using Xunit;
-
-using RockPaperScissors.Util;
 
 namespace RockPaperScissors.UI
 {
@@ -12,7 +11,8 @@ namespace RockPaperScissors.UI
         [Fact]
         public void ClassicGetMoveTextReturnsANonEmptyString()
         {
-            foreach(MoveType move in MoveType.GetValues(typeof(MoveType))) {
+            foreach (MoveType move in MoveType.GetValues(typeof(MoveType)))
+            {
                 if ((int)move > 2) break;
 
                 Assert.IsType<string>(lookup.GetText(move));

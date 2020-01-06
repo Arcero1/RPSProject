@@ -1,7 +1,6 @@
-﻿using System;
+﻿using RockPaperScissors.Util;
+using System;
 using System.Collections.Generic;
-
-using RockPaperScissors.Util;
 
 namespace RockPaperScissors.UI
 {
@@ -22,7 +21,7 @@ namespace RockPaperScissors.UI
 
         public string GetText(Outcome outcome)
         {
-            if(outcome == Outcome.UNDEFINED)
+            if (outcome == Outcome.UNDEFINED)
             {
                 throw new Exception();
             }

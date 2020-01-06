@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace RockPaperScissors.UI
+﻿namespace RockPaperScissors.UI
 {
     public struct Messages
     {

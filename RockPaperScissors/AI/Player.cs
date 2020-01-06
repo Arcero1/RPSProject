@@ -1,56 +1,58 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
+﻿using RockPaperScissors.Moves;
 using RockPaperScissors.Util;
-using RockPaperScissors.Moves;
-using RockPaperScissors.UI;
+using System.Collections.Generic;
 
 namespace RockPaperScissors.AI
 {
     public class Player
     {
-        ScoreKeeper scoreKeeper;
-        MoveKeeper moveKeeper;
+        private readonly ScoreKeeper _scoreKeeper = new ScoreKeeper();
+        private readonly MoveKeeper _moveKeeper;
 
-        public Player(GameMode mode)
+        protected Move _nextMove;
+        public Move NextMove
         {
-            scoreKeeper = new ScoreKeeper();
-            moveKeeper = new MoveKeeper(mode);
+            get { return _nextMove; }
         }
 
         public Player()
         {
-            scoreKeeper = new ScoreKeeper();
-            moveKeeper = new MoveKeeper(GameMode.CLASSIC);
+            _moveKeeper = new MoveKeeper(GameMode.CLASSIC);
         }
 
-        public Outcome Play(Move move, MoveType opponentMove)
+        public Player(GameMode mode)
         {
-            moveKeeper.Update(move.GetMoveType());
-            Outcome outcome = move.Compare(opponentMove);
-            scoreKeeper.Update(outcome);
+            _moveKeeper = new MoveKeeper(mode);
+        }
+
+        public Outcome Compare(Move opponentMove)
+        {
+            Outcome outcome = _nextMove.Compare(opponentMove);
+
+            _moveKeeper.Update(_nextMove.GetMoveType());
+            _scoreKeeper.Update(outcome);
+
             return outcome;
         }
 
-        public Outcome GetResult()
+        public Outcome OverallResult
         {
-            return scoreKeeper.GetOverallOutcome();
+            get { return _scoreKeeper.CalculateResult(); }
         }
 
-        public Dictionary<Outcome, int> GetScores()
+        public Dictionary<Outcome, int> Results
         {
-            return scoreKeeper.GetScores();
+            get { return _scoreKeeper.Results; }
         }
 
-        public List<MoveType> GetMostUsedMoves()
+        public List<MoveType> MostUsedMoves
         {
-            return moveKeeper.GetMostUsedMove();
+            get { return _moveKeeper.MostUsed; }
         }
 
-        public int GetMostUsedMoveInstanceNumber()
+        public int MostUsedMovesFrequency
         {
-            return moveKeeper.GetMostUsedMoveInstanceNumber();
+            get { return _moveKeeper.MostUsedFrequency; }
         }
     }
 }

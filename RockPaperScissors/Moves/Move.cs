@@ -1,6 +1,5 @@
-﻿using System.Collections.Generic;
-
-using RockPaperScissors.Util;
+﻿using RockPaperScissors.Util;
+using System.Collections.Generic;
 
 namespace RockPaperScissors.Moves
 {
@@ -24,6 +23,13 @@ namespace RockPaperScissors.Moves
         {
             return outcomeDictionary[hand];
         }
+
+        public Outcome Compare(Move move)
+        {
+            return Compare(move.GetMoveType());
+        }
+
+
 
         public abstract MoveType GetMoveType();
     }

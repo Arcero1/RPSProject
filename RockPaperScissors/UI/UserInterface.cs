@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-
+﻿using RockPaperScissors.Moves;
 using RockPaperScissors.Util;
-using RockPaperScissors.Moves;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace RockPaperScissors.UI
@@ -30,7 +29,7 @@ namespace RockPaperScissors.UI
         public static void DisplayEndGameScreen(Outcome outcome)
         {
             Console.WriteLine(Messages.DialogueEndGame);
-            Console.WriteLine(outcome == Outcome.WIN ? Messages.DialogueWin : 
+            Console.WriteLine(outcome == Outcome.WIN ? Messages.DialogueWin :
                 outcome == Outcome.LOSE ? Messages.DialogueLose : Messages.DialogueDraw);
             Console.WriteLine(Messages.DialoguePreFinalScores);
         }

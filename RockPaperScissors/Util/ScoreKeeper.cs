@@ -1,18 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 
 namespace RockPaperScissors.Util
 {
     public class ScoreKeeper
     {
-        private Dictionary<Outcome, int> _scores = new Dictionary<Outcome, int>();
+        private readonly Dictionary<Outcome, int> _scores = new Dictionary<Outcome, int>();
+        public Dictionary<Outcome, int> Results
+        {
+            get { return _scores; }
+        }
+
 
         public ScoreKeeper()
         {
-            _scores.Add(Outcome.WIN, 0);
-            _scores.Add(Outcome.DRAW, 0);
-            _scores.Add(Outcome.LOSE, 0);
+            Init();
         }
 
         public void Update(Outcome outcome)
@@ -20,22 +21,18 @@ namespace RockPaperScissors.Util
             _scores[outcome]++;
         }
 
-        public Dictionary<Outcome, int> GetScores()
+        private void Init()
         {
-            return _scores;
+            _scores.Clear();
+            _scores.Add(Outcome.WIN, 0);
+            _scores.Add(Outcome.DRAW, 0);
+            _scores.Add(Outcome.LOSE, 0);
         }
 
-        public void Reset()
+        public Outcome CalculateResult()
         {
-            _scores[Outcome.WIN] = 0;
-            _scores[Outcome.LOSE] = 0;
-            _scores[Outcome.DRAW] = 0;
-        }
-
-        public Outcome GetOverallOutcome()
-        {
-            return _scores[Outcome.WIN] > _scores[Outcome.LOSE] ? Outcome.WIN : 
-                _scores[Outcome.WIN] < _scores[Outcome.LOSE] ? Outcome.LOSE : Outcome.DRAW;
+            return _scores[Outcome.WIN] > _scores[Outcome.LOSE] ? Outcome.WIN :
+                    _scores[Outcome.WIN] < _scores[Outcome.LOSE] ? Outcome.LOSE : Outcome.DRAW;
         }
     }
 }

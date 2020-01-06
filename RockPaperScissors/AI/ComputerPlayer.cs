@@ -1,26 +1,29 @@
-﻿using System;
+﻿using RockPaperScissors.Moves;
 using RockPaperScissors.Util;
+using System;
 
 namespace RockPaperScissors.AI
 {
-    public class Opponent
+    public class ComputerPlayer : Player
     {
         private Random _rng = new Random();
         private GameMode _mode = GameMode.CLASSIC;
 
-        public Opponent()
-        {}
+        public ComputerPlayer()
+        {
+        }
 
-        public Opponent(GameMode mode)
+        public ComputerPlayer(GameMode mode) : base(mode)
         {
             _mode = mode;
         }
 
-        public MoveType Play()
+        public Move GenerateNextMove()
         {
             if (_mode == GameMode.CLASSIC)
             {
-                return (MoveType)_rng.Next(3);
+                _nextMove = MoveGenerator.Generate((MoveType)_rng.Next(3));
+                return _nextMove;
             }
 
             // other modes not implemented yet
